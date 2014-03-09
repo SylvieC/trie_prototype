@@ -35,9 +35,6 @@ App.Routers.Main = Backbone.Router.extend({
         });
       });
     });
-    setInterval(function() {
-      App.showUpdate();
-    }, 300);
   }
 });
 
