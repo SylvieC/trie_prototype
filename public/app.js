@@ -25,23 +25,29 @@ App.Routers.Main = Backbone.Router.extend({
 
 
   index: function() {
-    var keepShowing = setInterval(function() {
+    $(function() {
       $('#query').on('input', function() {
-        var query = $('#query').val();
-        if (query.length === 0) {
-          $('#results').empty();
-        } else {
-          resulting_array = App.autocompleter.complete(query);
-          _.each(resulting_array, function(item) {
-
-            $('#results').append('<li>' + item + '</li>');
-
-          });
-        }
+        App.showUpdate();
       });
-    }, 500);
+    });
+    setInterval(function() {
+      App.showUpdate();
+    }, 300);
   }
 });
+
+App.showUpdate = function() {
+  $('#query').on('input', function() {
+    var query = $('#query').val();
+    $('#results').empty();
+    resulting_array = App.autocompleter.complete(query);
+    _.each(resulting_array, function(item) {
+
+      $('#results').append('<li>' + item + '</li>');
+
+    });
+  });
+};
 
 
 
