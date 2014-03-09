@@ -27,13 +27,15 @@ App.Routers.Main = Backbone.Router.extend({
   index: function() {
     $('#query').on('input', function() {
       var query = $('#query').val();
-      //   if (query.length === 0) {
-      //     $('#results').empty();
-      //   } else {
-      //     $.each(App.autocompleter.complete(query), function(index, item) {
-      //       $('#results').append(view.render().el);
-      //     });
-      //   }
+      if (query.length === 0) {
+        $('#results').empty();
+      } else {
+        resulting_array = App.autocompleter.complete(query);
+        _.each(resulting_array, function(item) {
+
+          $('#results').html('<li>' + item + '</li>');
+        });
+      }
 
     });
   }
@@ -42,5 +44,5 @@ App.Routers.Main = Backbone.Router.extend({
 
 $(document).ready(function() {
   App.initialize();
-  this.html.render(this);
+  // this.html.render();
 });
