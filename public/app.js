@@ -27,7 +27,12 @@ App.Routers.Main = Backbone.Router.extend({
   index: function() {
     $(function() {
       $('#query').on('input', function() {
-        App.showUpdate();
+        var query = $('#query').val();
+        $('#results').empty();
+        resulting_array = App.autocompleter.complete(query);
+        _.each(resulting_array, function(item) {
+          $('#results').append('<li>' + item + '</li>');
+        });
       });
     });
     setInterval(function() {
@@ -35,19 +40,6 @@ App.Routers.Main = Backbone.Router.extend({
     }, 300);
   }
 });
-
-App.showUpdate = function() {
-  $('#query').on('input', function() {
-    var query = $('#query').val();
-    $('#results').empty();
-    resulting_array = App.autocompleter.complete(query);
-    _.each(resulting_array, function(item) {
-
-      $('#results').append('<li>' + item + '</li>');
-
-    });
-  });
-};
 
 
 
